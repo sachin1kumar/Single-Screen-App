@@ -3,4 +3,5 @@
     <string name="trending">Trending</string>
     <string name="sort_by_names">Sort by names</string>
     <string name="sort_by_stars">Sort by stars</string>
+    <string name="http_www_sample_com_sample_livedata_same">http://www.sample.com/sample/livedata/same</string>
 </resources>
