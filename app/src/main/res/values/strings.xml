@@ -4,4 +4,7 @@
     <string name="sort_by_names">Sort by names</string>
     <string name="sort_by_stars">Sort by stars</string>
     <string name="http_www_sample_com_sample_livedata_same">http://www.sample.com/sample/livedata/same</string>
+    <string name="something_went_wrong">Something went wrong..</string>
+    <string name="an_alien_is_probably_blocking_your_signal">An alien is probably blocking your signal.</string>
+    <string name="retry">Retry</string>
 </resources>
