@@ -1,4 +1,4 @@
-package com.manager.singlescreenapp
+package com.manager.singlescreenapp.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
 import com.facebook.shimmer.ShimmerFrameLayout
+import com.manager.singlescreenapp.R
 
 class MainActivity : AppCompatActivity() {
 
