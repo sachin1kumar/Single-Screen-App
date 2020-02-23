@@ -1,7 +1,6 @@
 package com.manager.singlescreenapp.model.remote
 
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.manager.singlescreenapp.model.Author

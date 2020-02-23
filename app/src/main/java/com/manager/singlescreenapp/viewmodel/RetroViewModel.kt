@@ -9,7 +9,7 @@ import com.manager.singlescreenapp.model.remote.GetNetworkData
 class RetroViewModel : ViewModel() {
 
     var getNetworkData: GetNetworkData = GetNetworkData()
-    private var remoteLiveData: LiveData<List<Author>> = MutableLiveData()
+    var remoteLiveData: LiveData<List<Author>> = MutableLiveData()
 
     init {
         fetchRemoteData()
