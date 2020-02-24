@@ -41,6 +41,9 @@ public class Author implements Parcelable {
     @SerializedName("currentPeriodStars")
     private String currentPeriodStars;
 
+    // State of the item
+    private boolean expanded;
+
     public String getForks() {
         return forks;
     }
@@ -149,6 +152,14 @@ public class Author implements Parcelable {
             return new Author[size];
         }
     };
+
+    public boolean isExpanded() {
+        return expanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        this.expanded = expanded;
+    }
 }
 
 
