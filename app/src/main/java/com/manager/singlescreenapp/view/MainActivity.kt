@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.manager.singlescreenapp.R
 import com.manager.singlescreenapp.model.Author
@@ -25,12 +26,15 @@ class MainActivity : AppCompatActivity() {
     private lateinit var shimmerFrameLayout: ShimmerFrameLayout
     private lateinit var retroViewModel: RetroViewModel
     private lateinit var recyclerView: RecyclerView
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+    private lateinit var adapter: Adapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         initViews()
+        swipeRefreshListener()
         initViewModel()
         fetchRemoteData()
     }
@@ -40,20 +44,21 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         shimmerFrameLayout = findViewById(R.id.shimmer_view_container)
         recyclerView = findViewById(R.id.recycler_view)
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout)
     }
 
     private fun fetchRemoteData() {
         retroViewModel.remoteLiveData.observe(this,
-            Observer<List<Author>> { t ->
-                t?.apply {
-                    Log.e("Observer","response"+t.get(0))
-                    setDataInAdapter(t)
+            Observer<List<Author>> { data ->
+                data?.apply {
+                    Log.e("Observer","response"+data.get(0))
+                    setDataInAdapter(data)
                 }
             })
     }
 
-    private fun setDataInAdapter(t: List<Author>) {
-        val adapter = Adapter(t,this)
+    private fun setDataInAdapter(data: List<Author>) {
+        adapter = Adapter(data,this)
         val layoutManager = LinearLayoutManager(this)
         (recyclerView.itemAnimator as SimpleItemAnimator?)?.supportsChangeAnimations = false
         recyclerView.layoutManager = layoutManager
@@ -83,9 +88,13 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onPause() {
-        super.onPause()
+    private fun swipeRefreshListener() {
+        swipeRefreshLayout.setOnRefreshListener {
+            //request network data.
+            fetchRemoteData()
+            adapter.notifyDataSetChanged()
+            swipeRefreshLayout.isRefreshing = false
+        }
     }
-
 
 }
