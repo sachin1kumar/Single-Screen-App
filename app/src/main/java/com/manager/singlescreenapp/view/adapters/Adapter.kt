@@ -32,7 +32,7 @@ class Adapter(
     override fun onBindViewHolder(holder: RecViewHolder, position: Int) {
         val author = list!![position]
         holder.bind(author)
-        holder.itemView.setOnClickListener { v: View? ->
+        holder.itemView.setOnClickListener {
             val expanded: Boolean = author.isExpanded
             author.isExpanded = !expanded
             notifyItemChanged(position)
