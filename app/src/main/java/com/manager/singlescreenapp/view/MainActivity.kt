@@ -30,15 +30,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
-
-        shimmerFrameLayout = findViewById(R.id.shimmer_view_container)
-        recyclerView = findViewById(R.id.recycler_view)
-
+        initViews()
         initViewModel()
         fetchRemoteData()
+    }
 
+    private fun initViews() {
+        toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        shimmerFrameLayout = findViewById(R.id.shimmer_view_container)
+        recyclerView = findViewById(R.id.recycler_view)
     }
 
     private fun fetchRemoteData() {
