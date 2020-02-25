@@ -2,7 +2,6 @@ package com.manager.singlescreenapp.view.adapters
 
 import android.content.Context
 import android.graphics.Color
-import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +21,8 @@ class Adapter(
 ) :
     RecyclerView.Adapter<Adapter.RecViewHolder>() {
 
+    private var mExpandedPosition = -1
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecViewHolder {
         val view: View = LayoutInflater
             .from(parent.context)
@@ -31,11 +32,11 @@ class Adapter(
 
     override fun onBindViewHolder(holder: RecViewHolder, position: Int) {
         val author = list!![position]
+        author.isExpanded = position == mExpandedPosition
         holder.bind(author)
         holder.itemView.setOnClickListener {
-            val expanded: Boolean = author.isExpanded
-            author.isExpanded = !expanded
-            notifyItemChanged(position)
+            mExpandedPosition = if (author.isExpanded) -1 else position
+            notifyDataSetChanged()
         }
     }
 
@@ -56,9 +57,8 @@ class Adapter(
         private val dot: ImageView
 
         fun bind(author: Author) {
-            val expanded: Boolean = author.isExpanded
-            subItem.visibility = if (expanded) View.VISIBLE else View.GONE
-            seperator.visibility = if (expanded) View.GONE else View.VISIBLE
+            subItem.visibility = if (author.isExpanded) View.VISIBLE else View.GONE
+            seperator.visibility = if (author.isExpanded) View.GONE else View.VISIBLE
             name.text = author.author
             type.text = author.name
             url.text = author.url
