@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setDataInAdapter(t: List<Author>) {
-        val adapter = Adapter(t)
+        val adapter = Adapter(t,this)
         val layoutManager = LinearLayoutManager(this)
         (recyclerView.itemAnimator as SimpleItemAnimator?)?.supportsChangeAnimations = false
         recyclerView.layoutManager = layoutManager

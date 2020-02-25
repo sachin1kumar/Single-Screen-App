@@ -1,16 +1,24 @@
 package com.manager.singlescreenapp.view.adapters
 
+import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.bumptech.glide.Glide
 import com.manager.singlescreenapp.R
 import com.manager.singlescreenapp.model.Author
+import de.hdodenhof.circleimageview.CircleImageView
 
 
-class Adapter(private val list: List<Author>?) :
+class Adapter(
+    private val list: List<Author>?,
+    private val context: Context
+) :
     RecyclerView.Adapter<Adapter.RecViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecViewHolder {
@@ -43,6 +51,8 @@ class Adapter(private val list: List<Author>?) :
         private val forks: TextView
         private val subItem: View
         private val seperator: View
+        private val image: CircleImageView
+        private val dot: View
 
         fun bind(author: Author) {
             val expanded: Boolean = author.isExpanded
@@ -54,6 +64,14 @@ class Adapter(private val list: List<Author>?) :
             lang.text = author.language
             stars.text = author.stars
             forks.text = author.forks
+            if (author.languageColor!=null) {
+                val bgShape = dot.background as GradientDrawable
+                bgShape.setColor(Color.parseColor(author.languageColor))
+            }
+            Glide.with(context)
+                .load(author.avatar)
+                .placeholder(R.drawable.circular_view)
+                .into(image)
         }
 
         init {
@@ -65,6 +83,8 @@ class Adapter(private val list: List<Author>?) :
             forks = itemView.findViewById(R.id.fork)
             subItem = itemView.findViewById(R.id.child)
             seperator = itemView.findViewById(R.id.seperator)
+            image = itemView.findViewById(R.id.image)
+            dot = itemView.findViewById(R.id.dot)
         }
     }
 

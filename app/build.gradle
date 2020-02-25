@@ -67,4 +67,11 @@ dependencies {
     testImplementation "androidx.arch.core:core-testing:$arch_version"
     //roboeletric
     testImplementation "org.robolectric:robolectric:4.3.1"
+    //glide library
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    // AndroidJUnitRunner and JUnit Rules
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test:rules:1.1.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:2.2.2'
 }

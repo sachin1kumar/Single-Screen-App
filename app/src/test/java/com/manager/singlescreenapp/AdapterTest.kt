@@ -24,7 +24,7 @@ class AdapterTest {
     fun setUp() {
         ShadowLooper.runUiThreadTasksIncludingDelayedTasks()
         list = ArrayList()
-        adapter = Adapter(list)
+        adapter = Adapter(list, RuntimeEnvironment.application)
         initHolder()
     }
 
