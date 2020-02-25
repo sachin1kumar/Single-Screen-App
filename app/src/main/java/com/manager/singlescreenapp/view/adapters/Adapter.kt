@@ -6,6 +6,7 @@ import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -52,7 +53,7 @@ class Adapter(
         private val subItem: View
         private val seperator: View
         private val image: CircleImageView
-        private val dot: View
+        private val dot: ImageView
 
         fun bind(author: Author) {
             val expanded: Boolean = author.isExpanded
@@ -65,8 +66,7 @@ class Adapter(
             stars.text = author.stars
             forks.text = author.forks
             if (author.languageColor!=null) {
-                val bgShape = dot.background as GradientDrawable
-                bgShape.setColor(Color.parseColor(author.languageColor))
+                dot.setColorFilter(Color.parseColor(author.languageColor))
             }
             Glide.with(context)
                 .load(author.avatar)

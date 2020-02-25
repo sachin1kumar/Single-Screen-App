@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/star"
@@ -22,20 +22,23 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="58dp"
         android:layout_marginTop="8dp"
-        android:fontFamily="@font/patrick_hand_sc"
+        android:padding="1dp"
+        android:fontFamily="@font/pingfangscregular"
         android:text="@string/http_www_sample_com_sample_livedata_same"
         android:textAllCaps="false"
         android:textColor="@color/text_main"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <View
+    <ImageView
         android:id="@+id/dot"
-        android:layout_width="10dp"
-        android:layout_height="10dp"
-        android:layout_marginStart="58dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/circular_view"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="8dp"
+        android:padding="3dp"
+        android:tint="@color/colorPrimaryDark"
+        android:src="@mipmap/moon"
         app:layout_constraintEnd_toStartOf="@+id/language"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/url"
