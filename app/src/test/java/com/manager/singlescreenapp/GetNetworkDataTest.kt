@@ -24,6 +24,5 @@ class GetNetworkDataTest {
 
     @After
     fun tearDown(){
-
     }
 }
