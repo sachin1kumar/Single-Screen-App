@@ -74,4 +74,6 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test:rules:1.1.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:2.2.2'
+    //Library for storing instance in shared preference.
+    implementation 'com.google.code.gson:gson:2.8.6'
 }
