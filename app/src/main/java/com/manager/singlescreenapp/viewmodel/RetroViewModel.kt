@@ -1,5 +1,6 @@
 package com.manager.singlescreenapp.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,6 +17,7 @@ class RetroViewModel : ViewModel() {
     }
 
     private fun fetchRemoteData() {
+        Log.e("RetroViewModel","getNetworkData:"+getNetworkData)
         remoteLiveData = getNetworkData.getRemoteData()
     }
 }

@@ -2,11 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/imageView"
@@ -43,9 +43,12 @@
             android:text="@string/an_alien_is_probably_blocking_your_signal"
             android:textColor="#929292"
             android:textSize="15dp"
+            android:layout_marginBottom="200dp"
+            app:layout_constraintBottom_toTopOf="@+id/retry"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_wrong_msg" />
+            app:layout_constraintTop_toBottomOf="@+id/text_wrong_msg"
+            app:layout_constraintVertical_bias="0.025" />
 
         <TextView
             android:id="@+id/retry"
@@ -63,7 +66,7 @@
             android:textSize="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.49"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/alien_msg"
             app:layout_constraintVertical_bias="1.0" />

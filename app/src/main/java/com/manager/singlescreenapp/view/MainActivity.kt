@@ -1,10 +1,13 @@
 package com.manager.singlescreenapp.view
 
+import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
@@ -16,27 +19,46 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.manager.singlescreenapp.R
 import com.manager.singlescreenapp.model.Author
+import com.manager.singlescreenapp.utils.NetworkUtil
+import com.manager.singlescreenapp.utils.Util
 import com.manager.singlescreenapp.view.adapters.Adapter
 import com.manager.singlescreenapp.viewmodel.RetroViewModel
 
-
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),SimpleCallBack {
 
     private lateinit var toolbar: Toolbar
     private lateinit var shimmerFrameLayout: ShimmerFrameLayout
-    private lateinit var retroViewModel: RetroViewModel
+    private var retroViewModel: RetroViewModel? = null
     private lateinit var recyclerView: RecyclerView
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
-    private lateinit var adapter: Adapter
+    private lateinit var container: LinearLayout
+    private var adapter: Adapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         initViews()
         swipeRefreshListener()
-        initViewModel()
-        fetchRemoteData()
+        checkInternetAndFetchData()
+    }
+
+    private fun checkInternetAndFetchData() {
+        if (NetworkUtil.isOnline(this)){
+            initViewModel()
+            fetchRemoteData()
+        }
+        else{
+            showNoInternetFragment()
+        }
+    }
+
+    private fun showNoInternetFragment() {
+        container.visibility = View.INVISIBLE
+        shimmerFrameLayout.stopShimmerAnimation()
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.shimmer_view_container,NoInternetConnectionFragment(),Util.FRAG_TAG)
+            .commit()
     }
 
     private fun initViews() {
@@ -45,10 +67,13 @@ class MainActivity : AppCompatActivity() {
         shimmerFrameLayout = findViewById(R.id.shimmer_view_container)
         recyclerView = findViewById(R.id.recycler_view)
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout)
+        container = findViewById(R.id.container)
     }
 
     private fun fetchRemoteData() {
-        retroViewModel.remoteLiveData.observe(this,
+        shimmerFrameLayout.startShimmerAnimation()
+        Log.e("MainAct","fetchRemoteData:retroViewModel:"+retroViewModel)
+        retroViewModel?.remoteLiveData?.observe(this,
             Observer<List<Author>> { data ->
                 data?.apply {
                     Log.e("Observer","response"+data.get(0))
@@ -78,23 +103,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
         return true
-    }
-
-    override fun onResume() {
-        super.onResume()
-        shimmerFrameLayout.startShimmerAnimation()
-
     }
 
     private fun swipeRefreshListener() {
         swipeRefreshLayout.setOnRefreshListener {
-            //request network data.
-            fetchRemoteData()
-            adapter.notifyDataSetChanged()
-            swipeRefreshLayout.isRefreshing = false
+           onRetry()
         }
     }
 
+    private fun removeNoInternetFragment(){
+        val fragment = supportFragmentManager.findFragmentByTag(Util.FRAG_TAG)
+        if (fragment != null) supportFragmentManager.beginTransaction().remove(fragment).commit()
+    }
+
+    override fun onRetry() {
+        removeNoInternetFragment()
+        if (container.visibility == View.INVISIBLE) {
+            container.visibility = View.VISIBLE
+        }
+        checkInternetAndFetchData()
+        adapter?.notifyDataSetChanged()
+        swipeRefreshLayout.isRefreshing = false
+    }
 }

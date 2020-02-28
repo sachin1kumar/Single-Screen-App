@@ -14,7 +14,6 @@ import com.manager.singlescreenapp.R
 import com.manager.singlescreenapp.model.Author
 import de.hdodenhof.circleimageview.CircleImageView
 
-
 class Adapter(
     private val list: List<Author>?,
     private val context: Context
