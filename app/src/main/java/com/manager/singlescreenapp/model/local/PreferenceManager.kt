@@ -61,4 +61,12 @@ class PreferenceManager {
         } catch (e: Exception) {}
     }
 
+    fun isFirstTime(): Boolean? {
+        return getSharedPreference()?.getBoolean(Util.IS_FIRST_TIME,true)
+    }
+
+    fun updateFirstTime(){
+        getSharedPreference()?.edit()?.putBoolean(Util.IS_FIRST_TIME,false)?.apply()
+    }
+
 }

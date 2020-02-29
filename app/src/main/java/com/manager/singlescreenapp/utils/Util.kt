@@ -9,4 +9,5 @@ object Util {
     const val CACH_KEY = "CACHED_DATA"
     const val DATA_DIR = "/data/data/"
     const val SHARED_PREF_DIR = "/shared_prefs/"
+    const val IS_FIRST_TIME = "isFirst"
 }
