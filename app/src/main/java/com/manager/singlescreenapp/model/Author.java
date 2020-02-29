@@ -3,7 +3,6 @@ package com.manager.singlescreenapp.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import com.google.gson.annotations.SerializedName;
 
 public class Author implements Parcelable {
@@ -48,56 +47,45 @@ public class Author implements Parcelable {
         return forks;
     }
 
-
     public BuiltBy[] getBuiltBy() {
         return builtBy;
     }
-
 
     public String getAuthor() {
         return author;
     }
 
-
     public String getName() {
         return name;
     }
-
 
     public String getDescription() {
         return description;
     }
 
-
     public String getLanguage() {
         return language;
     }
-
 
     public String getAvatar() {
         return avatar;
     }
 
-
     public String getLanguageColor() {
         return languageColor;
     }
-
 
     public String getStars() {
         return stars;
     }
 
-
     public String getUrl() {
         return url;
     }
 
-
     public String getCurrentPeriodStars() {
         return currentPeriodStars;
     }
-
 
     @Override
     public String toString() {

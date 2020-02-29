@@ -18,8 +18,6 @@ class CustomApplication : Application(){
         }
     }
 
-
-
     override fun onCreate() {
         super.onCreate()
         context = applicationContext

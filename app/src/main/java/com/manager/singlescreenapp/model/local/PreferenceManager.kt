@@ -3,19 +3,17 @@ package com.manager.singlescreenapp.model.local
 import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.manager.singlescreenapp.model.Author
 import com.manager.singlescreenapp.utils.CustomApplication
 import com.manager.singlescreenapp.utils.Util
-import java.io.File
-
+import java.lang.reflect.Type
 
 class PreferenceManager {
 
     companion object {
-
         @Volatile
         private var mPreference: PreferenceManager? = null
-
         private var mSharedPreferences: SharedPreferences? = null
 
         fun getPreferenceInstance(): PreferenceManager? {
@@ -45,28 +43,24 @@ class PreferenceManager {
     }
 
     fun getDataFromLocal(): List<Author>?{
-        return Gson().fromJson(getSharedPreference()?.getString( Util.CACH_KEY,""), null)
-    }
-
-    fun clearData() {
-        try {
-            getSharedPreference()?.edit()?.clear()
-            getSharedPreference()?.edit()?.apply()
-            val sharedPreferenceFile =
-                File( Util.DATA_DIR + CustomApplication.getAppContext().packageName.toString() +  Util.SHARED_PREF_DIR)
-            val listFiles = sharedPreferenceFile.listFiles()
-            for (file in listFiles) {
-                file.delete()
-            }
-        } catch (e: Exception) {}
+        val type: Type = object : TypeToken<List<Author>?>() {}.getType()
+        return Gson().fromJson(getSharedPreference()?.getString( Util.CACH_KEY,""), type)
     }
 
     fun isFirstTime(): Boolean? {
         return getSharedPreference()?.getBoolean(Util.IS_FIRST_TIME,true)
     }
 
-    fun updateFirstTime(){
+    fun updateFirstTime() {
         getSharedPreference()?.edit()?.putBoolean(Util.IS_FIRST_TIME,false)?.apply()
+    }
+
+    fun saveLastTime(time: String){
+        getSharedPreference()?.edit()?.putString(Util.LAST_TIME,time)?.apply()
+    }
+
+    fun getLastTime(): String? {
+        return getSharedPreference()?.getString(Util.LAST_TIME,"")
     }
 
 }

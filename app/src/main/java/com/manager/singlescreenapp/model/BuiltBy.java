@@ -1,9 +1,7 @@
 package com.manager.singlescreenapp.model;
 
-
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import com.google.gson.annotations.SerializedName;
 
 public class BuiltBy implements Parcelable {
@@ -21,16 +19,13 @@ public class BuiltBy implements Parcelable {
         return href;
     }
 
-
     public String getAvatar() {
         return avatar;
     }
 
-
     public String getUsername() {
         return username;
     }
-
 
     @Override
     public String toString() {

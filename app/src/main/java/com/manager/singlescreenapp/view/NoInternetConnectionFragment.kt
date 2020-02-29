@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.manager.singlescreenapp.R
-import com.manager.singlescreenapp.utils.CustomApplication
 
 class NoInternetConnectionFragment : Fragment() {
 
@@ -48,6 +47,4 @@ class NoInternetConnectionFragment : Fragment() {
             callBack?.onRetry()
         }
     }
-
-
 }

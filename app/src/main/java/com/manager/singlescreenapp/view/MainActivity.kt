@@ -1,7 +1,5 @@
 package com.manager.singlescreenapp.view
 
-import android.content.Context
-import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -38,13 +36,33 @@ class MainActivity : AppCompatActivity(),SimpleCallBack {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initViews()
+        initViewModel()
         swipeRefreshListener()
-        checkInternetAndFetchData()
+        setFlowForCaching()
+    }
+
+    private fun setFlowForCaching() {
+        if (retroViewModel?.isFirstTimeAppLaunch()!!){
+            val currentTIme = retroViewModel?.calculateCurrentTime()
+            currentTIme?.let { retroViewModel?.updateLastTime(it) }
+            checkInternetAndFetchData()
+            retroViewModel?.updateIsFirstFlag()
+        }
+        else{
+            val currentTIme = retroViewModel?.calculateCurrentTime()
+            val timeDiff = currentTIme?.let { retroViewModel?.calculateTimeDifference(it) }
+            if (timeDiff != null && timeDiff<2) {
+                retroViewModel?.getDataFromLocal()?.let { setDataInAdapter(it) }
+            }
+            else {
+                retroViewModel?.calculateCurrentTime()?.let { retroViewModel?.updateLastTime(it) }
+                checkInternetAndFetchData()
+            }
+        }
     }
 
     private fun checkInternetAndFetchData() {
         if (NetworkUtil.isOnline(this)){
-            initViewModel()
             fetchRemoteData()
         }
         else{
@@ -72,12 +90,12 @@ class MainActivity : AppCompatActivity(),SimpleCallBack {
 
     private fun fetchRemoteData() {
         shimmerFrameLayout.startShimmerAnimation()
-        Log.e("MainAct","fetchRemoteData:retroViewModel:"+retroViewModel)
-        retroViewModel?.remoteLiveData?.observe(this,
+        retroViewModel?.fetchRemoteData()?.observe(this,
             Observer<List<Author>> { data ->
                 data?.apply {
-                    Log.e("Observer","response"+data.get(0))
                     setDataInAdapter(data)
+                    //save data in local.
+                    retroViewModel?.saveDataInLocal(data)
                 }
             })
     }
@@ -108,7 +126,8 @@ class MainActivity : AppCompatActivity(),SimpleCallBack {
 
     private fun swipeRefreshListener() {
         swipeRefreshLayout.setOnRefreshListener {
-           onRetry()
+            retroViewModel?.calculateCurrentTime()?.let { retroViewModel?.updateLastTime(it) }
+            onRetry()
         }
     }
 
