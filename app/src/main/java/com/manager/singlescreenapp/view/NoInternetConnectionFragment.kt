@@ -27,15 +27,6 @@ class NoInternetConnectionFragment : Fragment() {
          return rootView
     }
 
-    companion object {
-        fun newInstance(): NoInternetConnectionFragment {
-            return instantiate(
-                CustomApplication.getAppContext(),
-                NoInternetConnectionFragment::class.java.getName()
-            ) as NoInternetConnectionFragment
-        }
-    }
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is SimpleCallBack) {
