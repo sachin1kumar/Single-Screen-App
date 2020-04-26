@@ -2,7 +2,7 @@ package com.manager.singlescreenapp.model.remote
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.manager.singlescreenapp.model.Author
+import com.manager.singlescreenapp.domain.entities.Author
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

@@ -1,4 +1,4 @@
-package com.manager.singlescreenapp.model;
+package com.manager.singlescreenapp.domain.entities;
 
 import android.os.Parcel;
 import android.os.Parcelable;

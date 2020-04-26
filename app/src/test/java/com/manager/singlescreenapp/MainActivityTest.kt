@@ -1,8 +1,7 @@
 package com.manager.singlescreenapp
 
-import com.manager.singlescreenapp.model.Author
+import com.manager.singlescreenapp.domain.entities.Author
 import com.manager.singlescreenapp.view.MainActivity
-import com.manager.singlescreenapp.view.SimpleCallBack
 import junit.framework.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test

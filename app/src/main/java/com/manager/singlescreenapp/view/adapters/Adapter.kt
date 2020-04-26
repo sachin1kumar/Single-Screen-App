@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.manager.singlescreenapp.R
-import com.manager.singlescreenapp.model.Author
+import com.manager.singlescreenapp.domain.entities.Author
 import de.hdodenhof.circleimageview.CircleImageView
 
 class Adapter(

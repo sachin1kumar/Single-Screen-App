@@ -1,6 +1,6 @@
 package com.manager.singlescreenapp.model.remote
 
-import com.manager.singlescreenapp.model.Author
+import com.manager.singlescreenapp.domain.entities.Author
 import retrofit2.Call
 import retrofit2.http.GET
 

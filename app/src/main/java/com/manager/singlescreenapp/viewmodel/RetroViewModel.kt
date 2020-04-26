@@ -2,17 +2,24 @@ package com.manager.singlescreenapp.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.manager.singlescreenapp.model.Author
+import com.manager.singlescreenapp.domain.entities.Author
+import com.manager.singlescreenapp.domain.usecases.GetLocalData
+import com.manager.singlescreenapp.domain.usecases.GetRemoteData
+import com.manager.singlescreenapp.model.DataRepository
+import com.manager.singlescreenapp.model.local.Local
 import com.manager.singlescreenapp.model.local.PreferenceManager
-import com.manager.singlescreenapp.model.remote.GetNetworkData
+import com.manager.singlescreenapp.model.remote.Remote
 import java.text.SimpleDateFormat
 import java.util.*
 
 class RetroViewModel : ViewModel() {
 
+    val dataRepo = DataRepository(Local(),Remote())
+    val localData = GetLocalData(dataRepo)
+    val remoteData = GetRemoteData(dataRepo)
+
     fun fetchRemoteData(): LiveData<List<Author>>  {
-        val getNetworkData = GetNetworkData()
-        return getNetworkData.getRemoteData()
+        return remoteData.getDataFromRemote()
     }
 
     fun calculateCurrentTime(): String {
@@ -20,7 +27,7 @@ class RetroViewModel : ViewModel() {
     }
 
     fun updateLastTime(time: String){
-        PreferenceManager.getPreferenceInstance()?.saveLastTime(time)
+        localData.updateLastTimeLocal(time)
     }
 
     fun updateIsFirstFlag(){
@@ -44,6 +51,6 @@ class RetroViewModel : ViewModel() {
     }
 
     fun getDataFromLocal(): List<Author>?{
-        return PreferenceManager.getPreferenceInstance()?.getDataFromLocal()
+        return localData.getDataFromLocal()
     }
 }

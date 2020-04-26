@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.manager.singlescreenapp.model.Author
+import com.manager.singlescreenapp.domain.entities.Author
 import com.manager.singlescreenapp.utils.CustomApplication
 import com.manager.singlescreenapp.utils.Util
 import java.lang.reflect.Type

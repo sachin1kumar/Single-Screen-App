@@ -1,7 +1,7 @@
 package com.manager.singlescreenapp
 
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.manager.singlescreenapp.model.Author
+import com.manager.singlescreenapp.domain.entities.Author
 import com.manager.singlescreenapp.view.adapters.Adapter
 import org.junit.After
 import org.junit.Before

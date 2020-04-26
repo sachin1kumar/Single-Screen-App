@@ -1,7 +1,6 @@
 package com.manager.singlescreenapp.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -16,7 +15,7 @@ import androidx.recyclerview.widget.SimpleItemAnimator
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.manager.singlescreenapp.R
-import com.manager.singlescreenapp.model.Author
+import com.manager.singlescreenapp.domain.entities.Author
 import com.manager.singlescreenapp.utils.NetworkUtil
 import com.manager.singlescreenapp.utils.Util
 import com.manager.singlescreenapp.view.adapters.Adapter
